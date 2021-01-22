@@ -27,15 +27,16 @@ public class TC001_GetPetAndPOSTCall extends TestBase {
 		Assert.assertEquals(true, responseBody.contains("available"));
 		logger.info(" ******************End of TC001_GetCustomer method check Response body *******************");
 	}
-/*
-
-	@Test(priority = 1, description = "to verify response of post call")
+	
+@Test(priority = 1, description = "to verify response of post call")
 	void getCustomerDetailsAPI_val8() throws InterruptedException {
-
-		String responseBody = response.getBody().asString();
-		List<String> pathvalue = response.getBody().jsonPath().getList("responseData.customerAgentDetails");
-		boolean isAgentDetailsEmpty = pathvalue.isEmpty();
-		Assert.assertTrue(responseBody != null);
-		Assert.assertEquals(false, isAgentDetailsEmpty);
-	}*/
+		JSONObject JSONResponseBody = new JSONObject(response.body().asString());
+		 String result = JSONResponseBody.getString({"id"});
+ 
+ 		//Assert.assertEquals(result, "{expectedValue}");
+		//List<String> pathvalue = response.getBody().jsonPath().getList("");
+		//boolean isPetpresent = pathvalue.isEmpty();
+		//Assert.assertTrue(responseBody != null);
+		//Assert.assertEquals(false, isAgentDetailsEmpty);
+	}
 }
