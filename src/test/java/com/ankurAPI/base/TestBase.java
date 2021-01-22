@@ -40,11 +40,33 @@ public class TestBase {
 		Thread.sleep(2);
 	}
 
-	public void post() throws InterruptedException{
+	public void postNewPet() throws InterruptedException{
 		RestAssured.baseURI = BASE_URL;
+		int randomInt = rand.nextInt(1000);
+		String apiBody = "{" +
+				"  \"id\": "+randomInt +," +
+				"  \"category\": {" +
+				"    \"id\":"+randomInt +," +
+				"    \"name\": \"Pet "+ randomInt +"\"" +
+				"  }," +
+				"  \"name\": \"dogssgie\"," +
+				"  \"photoUrls\": [" +
+				"    \"string\"" +
+				"  ]," +
+				"  \"tags\": [" +
+				"    {" +
+				"      \"id\": "+randomInt+," +
+				"      \"name\": \"string\"" +
+				"    }" +
+				"  ]," +
+				"  \"status\": \"available\"" +
+				"}";
+		RequestSpecBuilder builder = new RequestSpecBuilder();
+		builder.setBody(APIBody);
+		builder.setContentType("application/json; charset=UTF-8");
+		RequestSpecification requestSpec = builder.build();
 		RestAssured.useRelaxedHTTPSValidation();
-		httpRequest = RestAssured.given();
-		response = httpRequest.request(Method.GET,GET_AVAILABLE_PET);
+		response = given().spec(requestSpec).when().post(POST_PET);
 		Thread.sleep(2);
 	}
 
